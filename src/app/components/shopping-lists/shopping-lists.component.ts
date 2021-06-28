@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth/auth.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-shopping-lists',
@@ -8,13 +7,4 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class ShoppingListsComponent {
 
-  constructor(public authService: AuthService) { }
-
-  login() {
-    this.authService.loginViaGoogle().subscribe();
-  }
-
-  logout() {
-    this.authService.logout().subscribe();
-  }
 }
