@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "shopping-list-1eece": {
+      "hosting": {
+        "ShoppingList": [
+          "shopping-list-1eece"
+        ]
+      }
+    }
+  }
+}
