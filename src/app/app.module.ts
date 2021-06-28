@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppMaterialModule } from './app-material.module';
 import { AppFirebaseModule } from './app-firebase.module';
+import { ToolbarModule } from './components/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AppFirebaseModule } from './app-firebase.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AppMaterialModule,
-    AppFirebaseModule
+    AppFirebaseModule,
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

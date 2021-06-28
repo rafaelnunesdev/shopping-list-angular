@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ToolbarModule } from '../toolbar/toolbar.module';
 import { ShoppingListsComponent } from "./shopping-lists.component";
 
 const routes: Routes = [
@@ -14,8 +13,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    CommonModule,
-    ToolbarModule
+    CommonModule
   ],
   declarations: [ ShoppingListsComponent ],
   exports: [ ShoppingListsComponent ]
