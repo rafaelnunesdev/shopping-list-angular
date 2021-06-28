@@ -1,1 +1,18 @@
-<p>shopping-lists works!</p>
+<mat-toolbar>
+  <span>Shopping List</span>
+  <span class="spacer"></span>
+  <button
+    *ngIf="authService.user; else loginButtonTemplate"
+    (click)="logout()"
+    mat-icon-button
+    matTooltip="Logout">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <ng-template #loginButtonTemplate>
+    <button
+      (click)="login()"
+      matTooltip="Login">
+      <mat-icon>login</mat-icon>
+    </button>
+  </ng-template>
+</mat-toolbar>

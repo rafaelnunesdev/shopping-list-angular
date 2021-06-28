@@ -1,26 +1,28 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { BehaviorSubject, from, Observable, of } from "rxjs";
-import { switchMap } from 'rxjs/operators';
-import firebase from 'firebase';
+import { from, Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import firebase from 'firebase/app';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    private user: BehaviorSubject<Observable<firebase.User>> = new BehaviorSubject<Observable<firebase.User>>(of());
-    
-    user$ = this.user
-        .asObservable()
-        .pipe(switchMap((user: Observable<firebase.User>) => user));
+    user: firebase.User | null | undefined;
 
     constructor(private afAuth: AngularFireAuth) {
-        this.user.next(this.afAuth.authState as Observable<firebase.User>);
+        this.afAuth.authState.subscribe(authState => {
+            this.user = authState;
+        });
     }
 
     loginViaGoogle(): Observable<firebase.auth.UserCredential> {
-        return from(this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()));
+        return from(this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider()))
+            .pipe(map((userCredential: firebase.auth.UserCredential) => {
+                this.user = userCredential.user;
+                return userCredential;
+            }));
     }
 
     logout(): Observable<void> {
