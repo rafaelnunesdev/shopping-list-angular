@@ -1,0 +1,19 @@
+<mat-form-field
+  appearance="fill"
+  floatLabel="auto">
+  <mat-label>Name</mat-label>
+
+  <input
+    matInput
+    placeholder="Shopping list's name"
+    [(ngModel)]="name"
+    (keyup.enter)="done()">
+
+  <button
+    matSuffix
+    mat-icon-button
+    *ngIf="name"
+    (click)="done()">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</mat-form-field>

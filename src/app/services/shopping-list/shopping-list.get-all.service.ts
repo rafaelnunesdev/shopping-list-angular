@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-
-export interface IShoppingList {
-  name: string;
-}
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AuthService } from '../auth/auth.service';
+import { IShoppingList } from './shopping-list.interface';
 
 @Injectable()
 export class ShoppingListGetAllService {
 
-  shoppingLists: Array<IShoppingList> = [
-    { name: 'Grocery store' }, { name: 'Drug store' }
-  ];
+  constructor(
+    private db: AngularFireDatabase,
+    private auth: AuthService
+  ) { }
 
-  get(): Observable<Array<IShoppingList>> {
-    return of(this.shoppingLists);
+  getAll(): Observable<Array<IShoppingList>> {
+    return this.db.list<IShoppingList>('shoppingLists').snapshotChanges().pipe(
+      map(changes => changes.map(c => ({ key: c.payload.key, ...c.payload.val() }) as IShoppingList))
+    );
   }
 }
