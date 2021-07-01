@@ -1,12 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ShoppingListAddService } from '../../services/shopping-list/shopping-list.add.service';
+import { ShoppingListAddService } from '../../../../services/shopping-list/shopping-list.add.service';
 
 @Component({
-  selector: 'app-new-shopping-list',
-  templateUrl: './new-shopping-list.component.html',
-  styleUrls: ['./new-shopping-list.component.css']
+  selector: 'app-form-new-shopping-list',
+  templateUrl: './form-new-shopping-list.component.html',
+  styleUrls: ['./form-new-shopping-list.component.css']
 })
-export class NewShoppingListComponent {
+export class FormNewShoppingListComponent {
 
   @Output()
   newShoppingListCreated = new EventEmitter<string>();

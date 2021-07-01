@@ -6,7 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule, Routes } from "@angular/router";
 import { ShoppingListGetAllService } from '../../services/shopping-list/shopping-list.get-all.service';
-import { NewShoppingListModule } from '../new-shopping-list/new-shopping-list.module';
+import { NewShoppingListModule } from './new-shopping-list/new-shopping-list.module';
 import { ShoppingListsComponent } from "./shopping-lists.component";
 
 const routes: Routes = [
@@ -22,8 +22,6 @@ const routes: Routes = [
     CommonModule,
     FlexLayoutModule,
     MatCardModule,
-    MatButtonModule,
-    MatIconModule,
     NewShoppingListModule
   ],
   declarations: [ ShoppingListsComponent ],

@@ -1,43 +1,15 @@
 <div class="content">
+  <app-new-shopping-list
+    [shoppingListsCount]="shoppingLists.length"
+    (newShoppingListCreated)="newShoppingListCreated($event)">
+  </app-new-shopping-list>
 
-  <mat-card
-    fxLayout="column"
-    fxLayoutAlign="space-evenly center"
-    *ngIf="shoppingLists.length === 0; else cardsListTemplate">
-
-    <p>Your shopping lists will be displayed here.</p>
-
-    <p>It looks like you don't have any lists yet.</p>
-
-    <button
-      mat-flat-button
-      color="primary"
-      i18n
-      *ngIf="!createNew"
-      (click)="createNewList()">
-      CREATE YOUR FIRST
-    </button>
-  
-    <app-new-shopping-list
-      *ngIf="createNew"
-      (newShoppingListCreated)="newShoppingListCreated($event)">
-    </app-new-shopping-list>
-  </mat-card>
-
-  <ng-template #cardsListTemplate>
-
-    <button
-      mat-flat-button
-      color="primary"
-      i18n
-      *ngIf="!createNew"
-      (click)="createNewList()">
-      CREATE NEW LIST
-    </button>
-
-    <app-new-shopping-list
-      *ngIf="createNew"
-      (newShoppingListCreated)="newShoppingListCreated($event)">
-    </app-new-shopping-list>
-  </ng-template>
+  <div class="list">
+    <mat-card *ngFor="let shoppingList of shoppingLists">
+      <mat-card-header>
+        <mat-card-title> {{ shoppingList.name }} </mat-card-title>
+        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
 </div>

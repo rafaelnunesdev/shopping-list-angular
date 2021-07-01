@@ -9,8 +9,6 @@ import { IShoppingList } from '../../services/shopping-list/shopping-list.interf
 })
 export class ShoppingListsComponent implements OnInit {
 
-  createNew = false;
-
   shoppingLists: Array<IShoppingList> = [];
 
   constructor(public shoppingListGetAllService: ShoppingListGetAllService) { }
@@ -20,10 +18,6 @@ export class ShoppingListsComponent implements OnInit {
       console.log('shoppingLists', shoppingLists);
       this.shoppingLists = shoppingLists;
     });
-  }
-
-  createNewList() {
-    this.createNew = true;
   }
 
   newShoppingListCreated(newListUUID: string) {
