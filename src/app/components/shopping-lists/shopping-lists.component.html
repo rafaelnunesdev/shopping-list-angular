@@ -5,11 +5,12 @@
   </app-new-shopping-list>
 
   <div class="list">
-    <mat-card *ngFor="let shoppingList of shoppingLists">
-      <mat-card-header>
-        <mat-card-title> {{ shoppingList.name }} </mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+    <ng-template ngFor let-shoppingList [ngForOf]="shoppingLists">
+      <mat-card [routerLink]="shoppingList.id + '/items'">
+        <mat-card-header>
+          <mat-card-title> {{ shoppingList.name }} </mat-card-title>
+        </mat-card-header>
+      </mat-card>
+    </ng-template>
   </div>
 </div>

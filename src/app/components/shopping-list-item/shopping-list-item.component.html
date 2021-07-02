@@ -1,0 +1,81 @@
+<div
+  class="content"
+  *ngIf="shoppingList">
+
+  <h3> {{ shoppingList.name }} </h3>
+
+  <mat-form-field
+    class="new-item"
+    appearance="outline"
+    floatLabel="auto">
+    <mat-label>New item</mat-label>
+
+    <input
+      matInput
+      placeholder="New item description"
+      [(ngModel)]="itemDescription"
+      (keyup.enter)="newItem()">
+
+    <button
+      matSuffix
+      mat-icon-button
+      *ngIf="itemDescription"
+      (click)="newItem()">
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-form-field>  
+
+  <mat-accordion multi hideToggle="true">
+    <mat-expansion-panel *ngFor="let item of pendingItems | async">
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayout="row" fxLayoutAlign="start center"> {{ item.description }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <div class="item-actions">
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="markItemAsDone($event, item.id)">
+              <mat-icon>done</mat-icon>
+            </button>
+
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="deleteItem($event, item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <p *ngIf="((doneItems | async) ?? []).length > 0">Done Items</p>
+
+  <mat-accordion multi hideToggle="true">
+    <mat-expansion-panel *ngFor="let item of doneItems | async" disabled>
+      <mat-expansion-panel-header>
+        <mat-panel-title fxLayout="row" fxLayoutAlign="start center"> {{ item.description }}
+        </mat-panel-title>
+        <mat-panel-description>
+          <div class="item-actions">
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="markItemAsPending($event, item.id)">
+              <mat-icon>undo</mat-icon>
+            </button>
+
+            <button
+              matSuffix
+              mat-icon-button
+              (click)="deleteItem($event, item.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

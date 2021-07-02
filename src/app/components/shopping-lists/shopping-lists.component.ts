@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ShoppingListGetAllService } from '../../services/shopping-list/shopping-list.get-all.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { ShoppingListGetService } from '../../services/shopping-list/shopping-list.get.service';
 import { IShoppingList } from '../../services/shopping-list/shopping-list.interface';
 
 @Component({
@@ -7,20 +9,28 @@ import { IShoppingList } from '../../services/shopping-list/shopping-list.interf
   templateUrl: './shopping-lists.component.html',
   styleUrls: ['./shopping-lists.component.css']
 })
-export class ShoppingListsComponent implements OnInit {
+export class ShoppingListsComponent implements OnInit, OnDestroy {
 
   shoppingLists: Array<IShoppingList> = [];
+  getAllSubscription?: Subscription;
 
-  constructor(public shoppingListGetAllService: ShoppingListGetAllService) { }
+  constructor(
+    public router: Router,
+    public shoppingListGetService: ShoppingListGetService
+  ) { }
 
   ngOnInit() {
-    this.shoppingListGetAllService.getAll().subscribe(shoppingLists => {
+    this.getAllSubscription = this.shoppingListGetService.accessibleLists?.subscribe(shoppingLists => {
       console.log('shoppingLists', shoppingLists);
       this.shoppingLists = shoppingLists;
     });
   }
 
+  ngOnDestroy() {
+    this.getAllSubscription?.unsubscribe();
+  }
+
   newShoppingListCreated(newListUUID: string) {
-    alert('created ' + newListUUID);
+    this.router.navigate([newListUUID, 'items']);
   }
 }

@@ -2,7 +2,7 @@
   <span i18n>Shopping List</span>
   <span class="spacer"></span>
   <button
-    *ngIf="authService.user; else loginButtonTemplate"
+    *ngIf="authService.user$; else loginButtonTemplate"
     (click)="logout()"
     mat-icon-button
     matTooltip="Logout">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ShoppingListAddService } from '../../../../services/shopping-list/shopping-list.add.service';
+import { ShoppingListCommandService } from '../../../../services/shopping-list/shopping-list.command.service';
 
 @Component({
   selector: 'app-form-new-shopping-list',
@@ -13,10 +13,10 @@ export class FormNewShoppingListComponent {
 
   name = '';
 
-  constructor(public shoppingListAddService: ShoppingListAddService) { }
+  constructor(public shoppingListCommandService: ShoppingListCommandService) { }
 
   done() {
-    this.shoppingListAddService.add(this.name).subscribe(id => {
+    this.shoppingListCommandService.newList(this.name).subscribe(id => {
       this.newShoppingListCreated.emit(id);
     });
   }

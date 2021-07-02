@@ -1,0 +1,17 @@
+.content {
+  padding: 8pt;
+}
+
+.list {
+  margin-top: 8pt;
+}
+
+mat-form-field.new-item {
+  width: 100%;
+}
+
+.item-actions {
+  position: absolute;
+  right: 0;
+  top: 2pt;
+}

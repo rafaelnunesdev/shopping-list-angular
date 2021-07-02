@@ -1,18 +1,24 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule, Routes } from "@angular/router";
-import { ShoppingListGetAllService } from '../../services/shopping-list/shopping-list.get-all.service';
+import { ShoppingListGetService } from '../../services/shopping-list/shopping-list.get.service';
 import { NewShoppingListModule } from './new-shopping-list/new-shopping-list.module';
 import { ShoppingListsComponent } from "./shopping-lists.component";
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'shoppingLists'
+  },
+  {
+    path: 'shoppingLists',
     component: ShoppingListsComponent
+  },
+  {
+    path: 'shoppingLists/:id/items',
+    loadChildren: () => import('../shopping-list-item/shopping-list-item.module').then(m => m.ShoppingListItemModule)
   }
 ];
 
@@ -26,6 +32,6 @@ const routes: Routes = [
   ],
   declarations: [ ShoppingListsComponent ],
   exports: [ ShoppingListsComponent ],
-  providers: [ ShoppingListGetAllService ]
+  providers: [ ShoppingListGetService ]
 })
 export class ShoppingListsModule { }

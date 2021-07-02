@@ -1,8 +1,12 @@
 <mat-card
-  fxLayout="row"
+  fxLayout="column"
   fxLayoutAlign="space-evenly center">
 
-  <div *ngIf="shoppingListsCount === 0; else listNotEmpty">
+  <div
+    *ngIf="shoppingListsCount === 0; else listNotEmpty"
+    fxLayout="column"
+    fxLayoutAlign="space-evenly center">
+
     <p>Your shopping lists will be displayed here.</p>
   
     <p>It looks like you don't have any lists yet.</p>
@@ -33,20 +37,3 @@
     (newShoppingListCreated)="emitNewShoppingListCreated($event)">
   </app-form-new-shopping-list>
 </mat-card>
-
-<!--ng-template #cardsListTemplate>
-
-  <button
-    mat-flat-button
-    color="primary"
-    i18n
-    *ngIf="!createNew"
-    (click)="createNewList()">
-    CREATE NEW LIST
-  </button>
-
-  <app-form-new-shopping-list
-    *ngIf="createNew"
-    (newShoppingListCreated)="emitNewShoppingListCreated($event)">
-  </app-form-new-shopping-list>
-</ng-template-->

@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ShoppingListAddService } from '../../../services/shopping-list/shopping-list.add.service';
+import { ShoppingListCommandService } from '../../../services/shopping-list/shopping-list.command.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { FormNewShoppingListComponent } from './form-new-shopping-list/form-new-shopping-list.component';
@@ -24,6 +24,6 @@ import { FormNewShoppingListComponent } from './form-new-shopping-list/form-new-
   ],
   declarations: [ NewShoppingListComponent, FormNewShoppingListComponent ],
   exports: [ NewShoppingListComponent ],
-  providers: [ ShoppingListAddService ]
+  providers: [ ShoppingListCommandService ]
 })
 export class NewShoppingListModule {}
