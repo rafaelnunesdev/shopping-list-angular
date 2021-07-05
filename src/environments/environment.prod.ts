@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: 'YOUR apiKey HERE',
-    authDomain: 'YOUR authDomain HERE',
-    databaseURL: 'YOUR databaseURL HERE',
-    projectId: 'YOUR projectId HERE',
-    storageBucket: 'YOUR storageBucket HERE',
-    messagingSenderId: 'YOUR messagingSenderId HERE',
-    appId: 'YOUR appId HERE',
-    measurementId: 'YOUR measurementId HERE',
+    apiKey: 'AIzaSyAp3rxiUZAFbaYsnDlNMUT-fF28bMRAORw',
+    authDomain: 'shopping-list-1eece.firebaseapp.com',
+    databaseURL: 'https://shopping-list-1eece-default-rtdb.firebaseio.com',
+    projectId: 'shopping-list-1eece',
+    storageBucket: 'shopping-list-1eece.appspot.com',
+    messagingSenderId: '678700894609',
+    appId: '1:678700894609:web:82b15b9b885a24a6553230',
+    measurementId: 'G-EJBNBZVD0Y',
   },
 };

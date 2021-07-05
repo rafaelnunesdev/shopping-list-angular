@@ -3,6 +3,7 @@ import { MatExpansionPanel } from '@angular/material/expansion';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../../services/auth/auth.service';
 import { ShoppingListCommandService } from '../../services/shopping-list/shopping-list.command.service';
 import { ShoppingListGetService } from '../../services/shopping-list/shopping-list.get.service';
 import { IShoppingList, IShoppingListItem } from '../../services/shopping-list/shopping-list.interface';
@@ -15,14 +16,17 @@ import { IShoppingList, IShoppingListItem } from '../../services/shopping-list/s
 export class ShoppingListItemComponent implements OnInit {
 
   doneItems?: Observable<Array<IShoppingListItem>>;
+  gmailAccountShare = '';
   itemDescription = '';
   pendingItems?: Observable<Array<IShoppingListItem>>;
+  sharing = false;
   shoppingListId = '';
   shoppingList?: IShoppingList;
 
   constructor(
     public route: ActivatedRoute,
     public router: Router,
+    public auth: AuthService,
     public shoppingListGetService: ShoppingListGetService,
     public shoppingListCommandService: ShoppingListCommandService
   ) { }
@@ -65,5 +69,15 @@ export class ShoppingListItemComponent implements OnInit {
 
   newItem() {
     this.shoppingListCommandService.addItem(this.shoppingListId, this.itemDescription).subscribe(() => this.clearNewItem());
+  }
+
+  openShareField() {
+    this.sharing = true;
+  }
+
+  shareWith() {
+    this.shoppingListCommandService.shareWith(this.shoppingListId, this.gmailAccountShare).subscribe(() => {
+      this.sharing = false;
+    });
   }
 }

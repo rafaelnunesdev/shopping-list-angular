@@ -9,22 +9,15 @@ import { IShoppingList } from './shopping-list.interface';
 @Injectable()
 export class ShoppingListGetService {
 
-  accessibleLists?: Observable<Array<IShoppingList>>;
-  ownedLists?: Observable<Array<IShoppingList>>;
+  accessibleLists: Observable<Array<IShoppingList>> = this.auth.user.pipe(
+    concatMap(user => user ? this.db.object<IUser>(`users/${user?.uid}`).valueChanges() : of(null)),
+    concatMap(user => this.getAllById(Object.keys(user?.accessibleLists ?? {})))
+  );
 
   constructor(
     private db: AngularFireDatabase,
     private auth: AuthService
-  ) {
-    this.auth.user.pipe(
-      concatMap(user => user ? this.db.object<IUser>(`users/${user?.uid}`).valueChanges() : of(null))
-    ).subscribe(user => {
-      if (user) {
-        this.accessibleLists = this.getAllById(Object.keys(user?.accessibleLists ?? {}));
-        this.ownedLists = this.getAllById(Object.keys(user?.ownedLists ?? {}));
-      }
-    });
-  }
+  ) { }
 
   getAllById(shoppingListsIds: Array<string>): Observable<Array<IShoppingList>> {
     return forkJoin(shoppingListsIds.map(id  => {

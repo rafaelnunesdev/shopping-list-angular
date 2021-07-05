@@ -2,10 +2,25 @@
   class="content"
   *ngIf="shoppingList">
 
-  <h3> {{ shoppingList.name }} </h3>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <h3> {{ shoppingList.name }} </h3>
+
+    <div *ngIf="auth.user$?.uid === shoppingList.owner">
+      <button
+        mat-icon-button
+        (click)="openShareField()">
+        <mat-icon>share</mat-icon>
+      </button>
+  
+      <button mat-icon-button>
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
 
   <mat-form-field
-    class="new-item"
+    *ngIf="!sharing"
+    class="form-field"
     appearance="outline"
     floatLabel="auto">
     <mat-label>New item</mat-label>
@@ -23,7 +38,29 @@
       (click)="newItem()">
       <mat-icon>arrow_forward</mat-icon>
     </button>
-  </mat-form-field>  
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="sharing"
+    class="form-field"
+    appearance="outline"
+    floatLabel="auto">
+    <mat-label>Add Gmail account to share</mat-label>
+
+    <input
+      matInput
+      placeholder="Gmail account"
+      [(ngModel)]="gmailAccountShare"
+      (keyup.enter)="shareWith()">
+
+    <button
+      matSuffix
+      mat-icon-button
+      *ngIf="gmailAccountShare"
+      (click)="shareWith()">
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-form-field>
 
   <mat-accordion multi hideToggle="true">
     <mat-expansion-panel *ngFor="let item of pendingItems | async">
