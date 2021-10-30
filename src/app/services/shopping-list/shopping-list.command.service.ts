@@ -42,6 +42,10 @@ export class ShoppingListCommandService {
     );
   }
 
+  deleteList(shoppingListId: string): Observable<void> {
+    return from(this.db.object(`shoppingLists/${shoppingListId}`).remove());
+  }
+
   shareWith(shoppingListId: string, gmailAccount: string): Observable<void> {
     const hash = Md5.hashStr(gmailAccount);
     return from(this.db.object(`pendingSharing/${hash}/${shoppingListId}`).set(true));

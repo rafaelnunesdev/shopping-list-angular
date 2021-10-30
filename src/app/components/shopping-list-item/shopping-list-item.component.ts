@@ -71,6 +71,10 @@ export class ShoppingListItemComponent implements OnInit {
     this.shoppingListCommandService.addItem(this.shoppingListId, this.itemDescription).subscribe(() => this.clearNewItem());
   }
 
+  deleteShoppingList(): void {
+    this.shoppingListCommandService.deleteList(this.shoppingListId).subscribe(() => this.router.navigate(['../']));
+  }
+
   openShareField() {
     this.sharing = true;
   }

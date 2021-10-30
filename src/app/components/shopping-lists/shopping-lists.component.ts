@@ -21,7 +21,6 @@ export class ShoppingListsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getAllSubscription = this.shoppingListGetService.accessibleLists.subscribe(shoppingLists => {
-      console.log('shoppingLists', shoppingLists);
       this.shoppingLists = shoppingLists;
     });
   }
